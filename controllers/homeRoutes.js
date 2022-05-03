@@ -1,18 +1,20 @@
 const router = require('express').Router();
-const User = require('../models/User');
+const { User, Post, Comment } = require('../models');
+const sessionAuth = require('../utils/sessionAuth')
 
 router.get('/', async (req, res) => {
   // Send the rendered Handlebars.js template back as the response
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
+    const dbPostData = await Post.findAll({
+      include: [{ model: Comment}]
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
-
+    const postData = dbPostData.map((post) =>
+    post.get({ plain: true })
+  );
+    // res.status(200).json(postData);
     res.render('homepage', {
-      users,
+      postData,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -28,5 +30,24 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
+
+router.get('/dashboard', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      include: [{ model: Post, model: Comment }]
+    });
+    
+    if (!userData) {
+      res.status(404).json({ message: 'No id found with that id!' });
+      return;
+    }
+
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 
 module.exports = router;
