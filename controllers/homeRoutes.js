@@ -6,7 +6,9 @@ router.get('/', async (req, res) => {
   // Send the rendered Handlebars.js template back as the response
   try {
     const dbPostData = await Post.findAll({
-      include: [{ model: Comment}]
+      order: [['id', 'DESC']],
+      limit: 10,
+      include: [{ model: Comment}],
     });
 
     const postData = dbPostData.map((post) =>
