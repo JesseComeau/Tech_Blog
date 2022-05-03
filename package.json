@@ -1,13 +1,13 @@
 {
   "name": "tech-blog",
   "version": "0.1.0",
-  "description": "",
+  "description": "a tech blog",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "seed": "node seeds/seed.js"
   },
-  "author": "",
+  "author": "Jesse Comeau",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
