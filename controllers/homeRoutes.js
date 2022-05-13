@@ -33,22 +33,38 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/dashboard', async (req, res) => {
+router.get('/signup', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('signup');
+});
+
+router.get('/dashboard', sessionAuth, async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id, {
-      include: [{ model: Post, model: Comment }]
+    const userData = await User.findByPk(req.session.user_id, {
+      include: [{ model: Post}, {model:Comment}]
     });
-    
+
+    console.log(userData)
+
     if (!userData) {
       res.status(404).json({ message: 'No id found with that id!' });
       return;
     }
 
     res.status(200).json(userData);
+    res.render('dashboard', {
+      postData,
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 
 
