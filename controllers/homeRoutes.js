@@ -42,24 +42,22 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-router.get('/dashboard', sessionAuth, async (req, res) => {
+router.get('/dashboard',  async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
-      include: [{ model: Post}, {model:Comment}]
+    const dbUserData = await User.findByPk(req.session.user_id, {
+      include: [{ model: Post}]
     });
 
-    console.log(userData)
+    const userData = dbUserData.get(({ plain: true })
+    );
+    // console.log(userData)
 
-    if (!userData) {
-      res.status(404).json({ message: 'No id found with that id!' });
-      return;
-    }
-
-    res.status(200).json(userData);
     res.render('dashboard', {
-      postData,
+      userData,
       logged_in: req.session.logged_in,
     });
+
+    // res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
   }
