@@ -1,19 +1,27 @@
 <section>
     <div class="mb-4">Posts:</div>
-    <div class="accordion" id="accordionExample">
-        {{#each userData.posts}}
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button font-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    {{post_title}}
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {{post_message}}
+        <div class="accordion" id="accordionExample">
+
+            {{#each userData.posts}}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button font-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        {{post_title}}
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        {{post_message}}
+                    </div>
                 </div>
             </div>
+            {{/each}}
+
         </div>
-        {{/each}}
+    <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary mt-4 justify-content-center" data-bs-toggle="modal" data-bs-target="#addPostModal">
+    + New Post
+    </button>
     </div>
+            {{> new-post}}
 </section>

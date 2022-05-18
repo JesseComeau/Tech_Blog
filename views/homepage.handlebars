@@ -7,7 +7,7 @@
 
 
   {{#unless logged_in}}
-    <h2>Please login to view content</h2>
+    <h2>Please login or signup to view content.</h2>
   {{/unless}}
   {{#if logged_in}}
 
@@ -19,7 +19,7 @@
         <h2 class="accordion-header" id="heading{{id}}">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{id}}" aria-expanded="true" aria-controls="collapseOne">
           <div>
-            <h5>{{post_title}}</h5> 
+            <h5>{{post_title}}</h5>
             <h6>by: {{user_id}} &#9830; {{ format_date createdAt}} {{format_time createdAt}}</h6>
           </button>
         </h2>

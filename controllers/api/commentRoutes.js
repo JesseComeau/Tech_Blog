@@ -23,16 +23,21 @@ router.get('/', async (req, res) => {
     }
   });
 
-  router.get('/login', (req, res) => {
-    if (req.session.logged_in) {
-      res.redirect('/');
-      return;
-    }
+router.post('/', async (req, res) => {
+  try {
+    const commentData = await Comment.create({
+      name: req.body.name,
+      description: req.body.description,
+      private: req.body.private,
+      user_id: req.session.userId
+    });
+    res.status(201).json(collectionData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
-    res.render('login');
-  });
-
-  router.get('/dashboard', sessionAuth, async (req, res) => {
+  router.get('/dashboard', async (req, res) => {
     try {
       const userData = await User.findByPk(req.params.id, {
         include: [{ model: Post}]

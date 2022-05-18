@@ -26,7 +26,7 @@ const signupFormHandler = async (event) => {
     });
 
     if (!response.ok) {
-        console.log(response)
+        fieldWarning.textContent = "Email address already in use.";
     } else {
         document.location.replace(`/dashboard`);
     }

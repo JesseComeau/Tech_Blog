@@ -1,3 +1,6 @@
+const fieldWarning = document.querySelector("#fieldWarning")
+
+
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -11,10 +14,10 @@ const loginFormHandler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
 
-    if (response.ok) {
-      document.location.replace('/');
+    if (!response.ok) {
+      fieldWarning.textContent = "Incorrect email or password.";
     } else {
-      alert('Failed to log in');
+      document.location.replace(`/dashboard`);
     }
   }
 };
