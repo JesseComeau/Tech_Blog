@@ -1,0 +1,23 @@
+<div class="card" >
+  <div class="card-body">
+    <h4 class="card-title">{{postData.post_title}}</h4>
+    <p class="card-text">{{postData.post_message}}</p>
+
+  </div>
+  <ul class="list-group list-group-flush">
+  <h5 class="pl-1">Comments:</h5>
+        {{#each postData.comments}}
+            <li class="list-group-item">{{comment}}</li>
+        {{/each}}
+  </ul>
+  <div class="card-body">
+    <div class="d-flex">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+    + New Comment
+    </button>
+    </div>
+
+    {{> new-comment}}
+
+    </div>
+</div>

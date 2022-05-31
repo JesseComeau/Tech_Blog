@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
       include: [{ model: Comment}],
     });
 
+
     const postData = dbPostData.map((post) =>
     post.get({ plain: true })
   );
@@ -45,7 +46,10 @@ router.get('/signup', (req, res) => {
 router.get('/dashboard',  async (req, res) => {
   try {
     const dbUserData = await User.findByPk(req.session.user_id, {
-      include: [{ model: Post}]
+      include: [{ model: Post}],
+      order: [
+        [Post, 'id', 'DESC']
+      ]
     });
 
     const userData = dbUserData.get(({ plain: true })
@@ -62,6 +66,31 @@ router.get('/dashboard',  async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get('/post/:id',  async (req, res) => {
+  try {
+    const dbPostData = await Post.findByPk(req.params.id, {
+      include: [{ model: Comment}],
+
+    });
+
+    const postData = dbPostData.get(({ plain: true })
+    );
+    // console.log(postData)
+
+    res.render('post', {
+      postData,
+      logged_in: req.session.logged_in,
+      user_id: req.session.user_id,
+    });
+
+    // res.status(200).json(postData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 
 
 

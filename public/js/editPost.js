@@ -7,7 +7,7 @@ const newPost = async (event) => {
     const body = document.querySelector("#postBody").value.trim();
 
     if (!title || !body) {
-        fieldWarning.textContent = "Please include a title and body for your post.";
+        fieldWarning.textContent = "Please include an updated title and/or body for your post.";
         return;
     }
 
@@ -18,12 +18,12 @@ const newPost = async (event) => {
     });
 
     if (!response.ok) {
-        fieldWarning.textContent = "Please include a title and body for your post.";
+        fieldWarning.textContent = "Please include an updated title and/or body for your post.";
     } else {
         document.location.replace(`/dashboard`);
     }
 };
 
 document
-    .querySelector("#saveNewPost")
+    .querySelector("#saveEditPost")
     .addEventListener("click", newPost);

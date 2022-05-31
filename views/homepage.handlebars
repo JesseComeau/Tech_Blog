@@ -18,14 +18,22 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="heading{{id}}">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{id}}" aria-expanded="true" aria-controls="collapseOne">
-          <div>
+            <div>
             <h5>{{post_title}}</h5>
-            <h6>by: {{user_id}} &#9830; {{ format_date createdAt}} {{format_time createdAt}}</h6>
+            <h6> {{format_date createdAt}} {{format_time createdAt}}</h6>
+            </div>
           </button>
         </h2>
-        <div id="collapse{{id}}" class="accordion-collapse collapse" aria-labelledby="heading{{id}}" data-bs-parent="#accordionExample">
+        <div id="collapse{{id}}" class="accordion-collapse collapse position-relative " aria-labelledby="heading{{id}}" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             {{post_message}}
+          </div>
+          <div class="position-absolute top-50 end-0 translate-middle-y mr-4">
+          <button type="button" class="btn btn-info">
+            <a href="/post/{{id}}">
+            View Post
+            </a>
+            </button>
           </div>
         </div>
       </div>

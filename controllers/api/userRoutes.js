@@ -6,17 +6,17 @@ router.post('/', async (req, res) => {
     const userData = await User.create({
       email: req.body.email,
       password: req.body.password,
-  });
+    });
 
-  req.session.save(() => {
-    req.session.user_id = userData.id;
-    req.session.logged_in = true;
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
       res.status(201).json(userData);
-  });
-} catch (err) {
-  console.log(err);
-  res.status(500).json(err);
-}
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 router.post('/login', async (req, res) => {
