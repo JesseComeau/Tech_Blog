@@ -6,11 +6,6 @@
 <section class="container">
 
 
-  {{#unless logged_in}}
-    <h2>Please login or signup to view content.</h2>
-  {{/unless}}
-  {{#if logged_in}}
-
     <h3>Recent Posts</h3>
     <div class="accordion pt-2" id="accordionExample"></div>
 
@@ -40,6 +35,5 @@
     {{/each}}
 
   </div>
-  {{/if}}
 
 </section>
