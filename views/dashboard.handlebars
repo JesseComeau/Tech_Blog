@@ -4,6 +4,7 @@
 
             {{#each userData.posts}}
             <div class="accordion-item">
+                <p class="visually-hidden" id="postID">{{id}}</p>
                 <h2 class="accordion-header" id="heading{{id}}">
                     <button class="accordion-button font-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{id}}" aria-expanded="true" aria-controls="collapse{{id}}">
                         <div>
@@ -31,9 +32,9 @@
                 </div>
 
             </div>
+            {{> edit-post}}
             {{/each}}
 
-            {{> edit-post}}
 
         </div>
     <div class="d-flex justify-content-center">
